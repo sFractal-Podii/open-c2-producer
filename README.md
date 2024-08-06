@@ -12,7 +12,7 @@ To start your Phoenix server:
 
 ## How to use the project
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. Follow the following steps to run your project.
 
 1. Select the type of device you wish to test eg. TwinklyMaha.
 
