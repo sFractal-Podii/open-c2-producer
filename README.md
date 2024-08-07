@@ -7,7 +7,7 @@ OpenC2 is a standardized language for controlling cyber defense technologies. It
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
-  * Source the environment variables by running `source .env`.
+  * Source the environment variables by running `source .env`. This contains environment specific settings and keys.
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 ## How to use the project
