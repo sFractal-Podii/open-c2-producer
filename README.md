@@ -22,11 +22,15 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. F
 
 4. Click Run.
 
+![UI screenshot](docs/Screenshot%20from%20openc2.png)
+
 We designed this user interface (UI) to be quick and simple to use without requiring the user to input commands on the terminal, making it convenient for both technical and non-technical users.
 
 ## Expected results
 
-At this point, the selected broker is initiated which connects to the client device. The command selected in step 3 is executed, which turns the LED on/off.
+At this point, the selected broker is initiated which connects to the client device. The command selected in step 3 is executed, which turns the LED on/off. Head over to TwinklyMaha to see your changes.
+
+![UI screenshot](docs/Screenshot%20from%20TwinklyMaha.png)
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
