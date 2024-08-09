@@ -28,7 +28,7 @@ We designed this user interface (UI) to be quick and simple to use without requi
 
 ## Expected results
 
-At this point, the selected broker is initiated which connects to the client device. The command selected in step 3 is executed, which turns the LED on/off. Head over to TwinklyMaha to see your changes.
+At this point, the TwinklyMaha is connected to the broker and it's subscribed to the topic published by Openc2test. You can just head over to TwinklyMaha to see your changes..
 
 ![UI screenshot](docs/Screenshot%20from%20TwinklyMaha.png)
 
