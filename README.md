@@ -9,7 +9,7 @@ wish to test with.
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
-  * Create a file `.env` in the project root and add the following environment variables;
+  * Create a file `.env` in the project root and add the following environment variables:
     * export CLIENT_ID=:add your client_id
     * export MQTT_HOST=test.mosquitto.org
     * export MQTT_PORT=1883
