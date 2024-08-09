@@ -1,18 +1,28 @@
 # OpencC2Test
 
-OpenC2 is a standardized language for controlling cyber defense technologies. It allows different systems and components to communicate and coordinate with each other, regardless of the specific products or technologies they use. This enables automated and efficient management of cyber defenses.
+Openc2Test is a dashboard for testing connection between a publisher(Openc2Test) and subscriber(TwinklyMaha) over a broker. In this case, openc2test publishes a topic subscribed to by TwinklyMaha.
+This dashboard provides a convinient way for choosing a desired broker and the command you
+wish to test with.
 
 ## Setup Guide
 
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
+  * Create a file `.env` in the project root and add the following environment variables;
+    * export CLIENT_ID=:add your client_id
+    * export MQTT_HOST=test.mosquitto.org
+    * export MQTT_PORT=1883
+    * export USER_NAME=plug
+    * export PASSWORD=fest
   * Source the environment variables by running `source .env`. This contains environment specific settings and keys.
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 ## How to use the project
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. Follow the following steps to run your project.
+We are currently only testing one device [TwinklyMaha](https://github.com/sFractal-Podii/TwinklyMaHa). Make sure to have it set up and running to begin the test.
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. Follow the following steps to run this project.
 
 1. Select the type of device you wish to test eg. TwinklyMaha.
 
@@ -28,11 +38,9 @@ We designed this user interface (UI) to be quick and simple to use without requi
 
 ## Expected results
 
-At this point, the selected broker is initiated which connects to the client device. The command selected in step 3 is executed, which turns the LED on/off. Head over to TwinklyMaha to see your changes.
+At this point, the TwinklyMaha is connected to the broker and it's subscribed to the topic published by Openc2test. You can just head over to TwinklyMaha to see your changes.
 
 ![UI screenshot](docs/Screenshot%20from%20TwinklyMaha.png)
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## Learn more
 
