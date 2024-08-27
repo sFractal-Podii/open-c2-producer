@@ -18,8 +18,9 @@ defmodule OpencC2TestWeb.Router do
     pipe_through :browser
     get "/.well-known/sbom", PageController, :sbom
 
-    get "/", PageController, :home
-    live "/run_script", RunScriptLive
+    get "/home", PageController, :home
+
+    live "/", RunScriptLive
   end
 
   scope "/auth", OpencC2TestWeb do

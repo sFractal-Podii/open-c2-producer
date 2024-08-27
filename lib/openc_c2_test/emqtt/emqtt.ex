@@ -5,8 +5,8 @@ defmodule Emqtt do
 
   @clean_start false
 
-  def start_link([]) do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  def start_link(args \\ %{broker: "emqx"}) do
+    GenServer.start_link(__MODULE__, args, name: __MODULE__)
   end
 
   def init([]) do

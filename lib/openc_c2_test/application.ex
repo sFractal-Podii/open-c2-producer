@@ -18,10 +18,11 @@ defmodule OpencC2Test.Application do
       {Finch, name: OpencC2Test.Finch},
       # Start the Endpoint (http/https)
       OpencC2TestWeb.Endpoint,
+      {DynamicSupervisor, name: EmqttSupervisor, strategy: :one_for_one}
       # Start a worker by calling: OpencC2Test.Worker.start_link(arg)
       # {OpencC2Test.Worker, arg}
       # start emqtt connection
-      Emqtt
+      # Emqtt
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
