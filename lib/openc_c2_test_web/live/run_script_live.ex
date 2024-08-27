@@ -101,7 +101,7 @@ defmodule OpencC2TestWeb.RunScriptLive do
     |> Emqtt.publish()
   end
 
-  defp publish_message(params) do
+  defp publish_message(_params) do
     Logger.info("commands not matching")
   end
 end
