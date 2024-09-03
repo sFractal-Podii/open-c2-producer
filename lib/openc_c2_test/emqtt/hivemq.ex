@@ -1,4 +1,4 @@
-defmodule Emqtt do
+defmodule Emqtt.Hivemq do
   @moduledoc "Emqtt server responsible for handling pubsub between clients and broker"
   use GenServer
   require Logger
@@ -10,47 +10,47 @@ defmodule Emqtt do
   end
 
   def init([]) do
-    topic = "oc2/cmd/device/t01"
+    topic = "oc2/cmd/device/t02"
 
     clientid =
-      System.get_env("CLIENT_ID") ||
+      System.get_env("HIVEMQ_CLIENT_ID") ||
         raise """
-        environment variable CLIENT_ID is missing.
+        environment variable HIVEMQ_CLIENT_ID is missing.
         For example:
-        export CLIENT_ID=openc2test2023
+        export HIVEMQ_CLIENT_ID=sfractal2020
         """
 
     Logger.info("client_id is #{clientid}")
 
     host =
-      ~c"#{System.get_env("MQTT_HOST")}" ||
+      ~c"#{System.get_env("HIVEMQ_HOST")}" ||
         raise """
-        environment variable HOST is missing.
+        environment variable HIVEMQ_HOST is missing.
         Examples:
-        export MQTT_HOST="35.221.11.97 "
-        export MQTT_HOST="mqtt.broker.com"
+        export HIVEMQ_HOST="35.221.11.97 "
+        export HIVEMQ_HOST="mqtt.sfractal.com"
         """
 
     Logger.info("mqtt_host is #{host}")
 
     port =
       String.to_integer(
-        System.get_env("MQTT_PORT") ||
+        System.get_env("HIVEMQ_PORT") ||
           raise("""
-          environment variable MQTT_PORT is missing.
+          environment variable HIVEMQ_PORT is missing.
           Example:
-          export MQTT_PORT=1883
+          export HIVEMQ_PORT=1883
           """)
       )
 
     Logger.info("mqtt_port is #{port}")
 
     name =
-      String.to_atom(System.get_env("USER_NAME")) ||
+      String.to_atom(System.get_env("HIVEMQ_USER_NAME")) ||
         raise """
-        environment variable USER_NAME is missing.
+        environment variable HIVEMQ_USER_NAME is missing.
         Examples:
-        export USER_NAME="plug"
+        export HIVEMQ_USER_NAME="plug"
         """
 
     Logger.info("user_name is #{name}")

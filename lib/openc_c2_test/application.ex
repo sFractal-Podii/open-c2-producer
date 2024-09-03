@@ -21,7 +21,8 @@ defmodule OpencC2Test.Application do
       # Start a worker by calling: OpencC2Test.Worker.start_link(arg)
       # {OpencC2Test.Worker, arg}
       # start emqtt connection
-      Emqtt
+      {DynamicSupervisor, name: Emqtt.EmqxSupervisor, strategy: :one_for_one},
+      {DynamicSupervisor, name: Emqtt.HivemqSupervisor, strategy: :one_for_one}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

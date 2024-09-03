@@ -16,42 +16,47 @@ defmodule OpencC2TestWeb.RunScriptLive do
     <.flash_group flash={@flash} />
     <div class="left-[40rem] fixed inset-y-0 right-0 z-0 hidden lg:block xl:left-[50rem] bg-indigo-900">
       <div class="sm:flex sm:justify-center">
-        <.form class="mt-40 w-3/4 bg-gray-100 p-5 rounded-lg" for={@form} phx-change="validate" phx-submit="save">
+        <.form
+          class="mt-40 w-3/4 bg-gray-100 p-5 rounded-lg"
+          for={@form}
+          phx-change="validate"
+          phx-submit="save"
+        >
           <div class="mb-4">
             <.input
-            type="select"
-            field={@form[:device]}
-            options={[TwinklyMaha: "twinklymaha"]}
-            prompt="Select project"
-            label="Which device are you testing?"
+              type="select"
+              field={@form[:device]}
+              options={[TwinklyMaha: "twinklymaha"]}
+              prompt="Select project"
+              label="Which device are you testing?"
             />
           </div>
 
           <div class="mb-3">
             <.input
-            type="select"
-            field={@form[:broker]}
-            options={[
-              emqx_broker: "emqx",
-              HiveMQ_broker: "hivemq"
-            ]}
-            prompt="Select broker"
-            label="Which broker do you want to use?"
+              type="select"
+              field={@form[:broker]}
+              options={[
+                emqx_broker: "emqx",
+                HiveMQ_broker: "hivemq"
+              ]}
+              prompt="Select broker"
+              label="Which broker do you want to use?"
             />
           </div>
 
           <div class="mb-3">
             <.input
-            type="select"
-            field={@form[:command]}
-            options={[
-              Turn_led_on: "turn_led_on",
-              Turn_led_off: "turn_led_off",
-              Query_profile: "query_profile",
-              Query_sbom: "query_sbom"
-            ]}
-            prompt="Select command"
-            label="What command do you want to send?"
+              type="select"
+              field={@form[:command]}
+              options={[
+                Turn_led_on: "turn_led_on",
+                Turn_led_off: "turn_led_off",
+                Query_profile: "query_profile",
+                Query_sbom: "query_sbom"
+              ]}
+              prompt="Select command"
+              label="What command do you want to send?"
             />
           </div>
 
@@ -132,3 +137,8 @@ defmodule OpencC2TestWeb.RunScriptLive do
     Logger.info("commands not matching")
   end
 end
+
+# check broker 
+# call the required dynamic supervisor
+
+# terminate once publish is done
