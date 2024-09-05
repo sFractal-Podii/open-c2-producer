@@ -116,7 +116,7 @@ defmodule OpencC2TestWeb.RunScriptLive do
     |> Emqtt.publish()
   end
 
-  defp publish_message(%{"command" => command})
+  defp publish_message(%{"command" => command, "broker" => broker})
        when command == "turn_led_on" or command == "turn_led_off" do
     color =
       case command do
@@ -124,21 +124,32 @@ defmodule OpencC2TestWeb.RunScriptLive do
         "turn_led_off" -> "off"
       end
 
-    %{
+     %{
       "action" => "set",
       "args" => %{"response_requested" => "complete"},
       "target" => %{"led" => color}
     }
     |> Jason.encode!()
-    |> Emqtt.publish()
+
+    |> start_and_publish(broker)
   end
 
   defp publish_message(_params) do
     Logger.info("commands not matching")
   end
+
+  defp start_and_publish(message, "emqx") do
+    Emqtt.EmqxSupervisor.start_emqx()
+    Emqtt.Emqx.publish(message)
+  end
+
+  defp start_and_publish(message, "hivemq") do
+    Emqtt.HivemqSupervisor.start_hivemq()
+    Emqtt.Hivemq.publish(message)
+  end
 end
 
-# check broker 
+# check broker
 # call the required dynamic supervisor
 
 # terminate once publish is done
