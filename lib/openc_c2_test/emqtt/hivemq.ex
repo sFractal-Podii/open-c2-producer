@@ -83,12 +83,11 @@ defmodule Emqtt.Hivemq do
       message
     )
 
-    # {:noreply, state}
     {:stop, :normal, state}
   end
 
   def terminate(reason, state) do
-    {reason, state}
+    Logger.info("Emqx client terminated #{inspect({reason, state})}")
   end
 
   def publish(message) do
