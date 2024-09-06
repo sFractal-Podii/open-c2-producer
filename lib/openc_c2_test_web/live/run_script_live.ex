@@ -100,7 +100,7 @@ defmodule OpencC2TestWeb.RunScriptLive do
 
     publish_message(params)
 
-    Logger.info("message is published")
+    # Logger.info("message is published")
 
     {:noreply, put_flash(socket, :info, "Head over to TwinklyMaha to see your changes.")}
   end

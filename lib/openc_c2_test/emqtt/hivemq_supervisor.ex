@@ -7,7 +7,7 @@ defmodule Emqtt.HivemqSupervisor do
 
   def start_hivemq(args \\ []) do
     # If MyWorker is not using the new child specs, we need to pass a map:
-    spec = %{id: "hivemq", start: {Emqtt.Hivemq, :start_link, [args]}, restart: :temporary}
+    spec = %{id: "hivemq", start: {Emqtt.Hivemq, :start_link, [args]}, restart: :transient}
 
     DynamicSupervisor.start_child(__MODULE__, spec)
   end

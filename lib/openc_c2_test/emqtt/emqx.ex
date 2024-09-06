@@ -83,7 +83,11 @@ defmodule Emqtt.Emqx do
       message
     )
 
-    {:noreply, state}
+    {:stop, :normal, state}
+  end
+
+  def terminate(reason, state) do
+    {reason, state} |> IO.inspect(label: "========")
   end
 
   def publish(message) do
@@ -91,3 +95,8 @@ defmodule Emqtt.Emqx do
     GenServer.cast(__MODULE__, {:publish, message})
   end
 end
+
+# {:ok, pid_e} = Emqtt.EmqxSupervisor.start_emqx
+# Process.alive? pid_e
+# Emqtt.Emqx.publish payload
+# Process.alive? pid_e

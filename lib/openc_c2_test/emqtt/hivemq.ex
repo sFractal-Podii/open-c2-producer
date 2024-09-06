@@ -83,7 +83,12 @@ defmodule Emqtt.Hivemq do
       message
     )
 
-    {:noreply, state}
+    # {:noreply, state}
+    {:stop, :normal, state}
+  end
+
+  def terminate(reason, state) do
+    {reason, state}
   end
 
   def publish(message) do

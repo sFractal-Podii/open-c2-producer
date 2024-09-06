@@ -6,7 +6,7 @@ defmodule Emqtt.EmqxSupervisor do
   end
 
   def start_emqx(args \\ []) do
-    spec = %{id: "emqx", start: {Emqtt.Emqx, :start_link, [args]}, restart: :temporary}
+    spec = %{id: "emqx", start: {Emqtt.Emqx, :start_link, [args]}, restart: :transient}
 
     DynamicSupervisor.start_child(__MODULE__, spec)
   end
