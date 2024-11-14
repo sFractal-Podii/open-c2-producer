@@ -5,7 +5,7 @@ defmodule OpencC2TestWeb.Gettext do
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import OpencC2TestWeb.Gettext
+      use Gettext, backend: OpencC2TestWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")
@@ -20,5 +20,5 @@ defmodule OpencC2TestWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :openc_c2_test
+  use Gettext.Backend, otp_app: :openc_c2_test
 end

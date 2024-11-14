@@ -43,7 +43,7 @@ defmodule OpencC2TestWeb do
         layouts: [html: OpencC2TestWeb.Layouts]
 
       import Plug.Conn
-      import OpencC2TestWeb.Gettext
+      use Gettext, backend: OpencC2TestWeb.Gettext
       alias OpencC2TestWeb.Router.Helpers, as: Routes
 
       unquote(verified_routes())
@@ -84,10 +84,13 @@ defmodule OpencC2TestWeb do
     quote do
       # HTML escaping functionality
       # import Phoenix.HTML
-      use Phoenix.HTML
+
+      import Phoenix.HTML
+      import Phoenix.HTML.Form
+      use PhoenixHTMLHelpers
       # Core UI components and translation
       import OpencC2TestWeb.CoreComponents
-      import OpencC2TestWeb.Gettext
+      use Gettext, backend: OpencC2TestWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

@@ -17,7 +17,7 @@ defmodule OpencC2TestWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import OpencC2TestWeb.Gettext
+  use Gettext, backend: OpencC2TestWeb.Gettext
 
   @doc """
   Renders a modal.

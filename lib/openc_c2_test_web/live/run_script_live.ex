@@ -113,7 +113,7 @@ defmodule OpencC2TestWeb.RunScriptLive do
       "command_id" => "randomcommandid"
     }
     |> Jason.encode!()
-    |> Emqtt.publish()
+    |> Emqtt.Emqx.publish()
   end
 
   defp publish_message(%{"command" => command, "broker" => broker})
@@ -130,7 +130,6 @@ defmodule OpencC2TestWeb.RunScriptLive do
       "target" => %{"led" => color}
     }
     |> Jason.encode!()
-
     |> start_and_publish(broker)
   end
 

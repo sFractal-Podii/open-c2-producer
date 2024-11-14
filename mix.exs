@@ -5,7 +5,7 @@ defmodule OpencC2Test.MixProject do
     [
       app: :openc_c2_test,
       version: "0.5.1",
-      elixir: "~> 1.15.4",
+      elixir: "~> 1.17.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -37,26 +37,26 @@ defmodule OpencC2Test.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.7"},
-      {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.10"},
+      {:phoenix, "~> 1.7.14"},
+      {:phoenix_ecto, "~> 4.6"},
+      {:ecto_sql, "~> 3.12"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 3.3"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.19.5"},
-      {:floki, ">= 0.34.3", only: :test},
-      {:phoenix_live_dashboard, "~> 0.8.1"},
-      {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.11.6"},
-      {:finch, "~> 0.13"},
-      {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.23"},
-      {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
+      {:phoenix_html, "~> 4.1"},
+      {:phoenix_live_reload, "~> 1.5", only: :dev},
+      {:phoenix_live_view, "~> 0.20.17"},
+      {:floki, ">= 0.36.3", only: :test},
+      {:phoenix_live_dashboard, "~> 0.8.4"},
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2.4", runtime: Mix.env() == :dev},
+      {:swoosh, "~> 1.17.3"},
+      {:finch, "~> 0.19"},
+      {:telemetry_metrics, "~> 1.0"},
+      {:telemetry_poller, "~> 1.1"},
+      {:gettext, "~> 0.26"},
+      {:jason, "~> 1.4"},
+      {:plug_cowboy, "~> 2.7"},
       {:oauth2, "~> 2.0", override: true},
-      {:ueberauth, "~> 0.10.5"},
+      {:ueberauth, "~> 0.10.8"},
       {:ueberauth_github, "~> 0.8.1"},
       {
         :sbom,
@@ -64,9 +64,10 @@ defmodule OpencC2Test.MixProject do
         git: "https://github.com/sigu/sbom.git", branch: "auto-install-bom", runtime: false
       },
       {:ranch, ">= 0.0.0", manager: :rebar3, override: true},
-      {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
-      {:cowlib, "~> 2.11.0", override: true},
-      {:gun, "~> 1.3.0", override: true}
+      {:emqtt, github: "emqx/emqtt", tag: "1.13.3", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
+      {:cowlib, "~> 2.13.0", override: true},
+      {:gun, "~> 2.1.0", override: true},
+      {:phoenix_html_helpers, "~> 1.0"}
     ]
   end
 

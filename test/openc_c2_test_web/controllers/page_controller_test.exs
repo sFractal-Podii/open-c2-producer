@@ -3,6 +3,6 @@ defmodule OpencC2TestWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Peace of mind from prototype to production"
+    assert html_response(conn, 200) =~ "Openc2Test is a dashboard for testing connection between clients"
   end
 end

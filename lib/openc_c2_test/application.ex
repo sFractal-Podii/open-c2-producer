@@ -11,7 +11,7 @@ defmodule OpencC2Test.Application do
       # Start the Telemetry supervisor
       OpencC2TestWeb.Telemetry,
       # Start the Ecto repository
-      # OpencC2Test.Repo,
+      OpencC2Test.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: OpencC2Test.PubSub},
       # Start Finch
