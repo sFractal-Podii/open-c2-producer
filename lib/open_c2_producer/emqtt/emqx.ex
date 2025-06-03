@@ -29,7 +29,6 @@ defmodule OpenC2Producer.Emqtt.Emqx do
   end
 
   def handle_cast({:publish, {message, topic}}, %{pid: pid} = state) do
-    IO.inspect("(((())))")
     :emqtt.publish(pid, topic, message)
 
     {:noreply, state}
