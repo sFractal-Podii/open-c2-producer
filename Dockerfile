@@ -39,7 +39,7 @@ RUN mix assets.deploy && mix release
 
 FROM debian:bullseye-slim AS app
 
-ARG CLIENT_ID=openc2test2023
+ARG CLIENT_ID=Openc2Producer2023
 ARG MQTT_HOST="broker.emqx.io"
 ARG MQTT_PORT=1883
 ARG USER_NAME=plug
@@ -62,4 +62,4 @@ COPY --from=app_builder /opt/release/_build/ .
 RUN chown -R app: ./prod
 USER app
 
-CMD ["./prod/rel/openc_c2_test/bin/openc_c2_test", "start"]
+CMD ["./prod/rel/open_c2_producer/bin/open_c2_producer", "start"]

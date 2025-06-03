@@ -1,4 +1,4 @@
-defmodule OpencC2TestWeb.ConnCase do
+defmodule OpenC2ProducerWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule OpencC2TestWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use OpencC2TestWeb.ConnCase, async: true`, although
+  by setting `use OpenC2ProducerWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -20,19 +20,19 @@ defmodule OpencC2TestWeb.ConnCase do
   using do
     quote do
       # The default endpoint for testing
-      @endpoint OpencC2TestWeb.Endpoint
+      @endpoint OpenC2ProducerWeb.Endpoint
 
-      use OpencC2TestWeb, :verified_routes
+      use OpenC2ProducerWeb, :verified_routes
 
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import OpencC2TestWeb.ConnCase
+      import OpenC2ProducerWeb.ConnCase
     end
   end
 
   setup tags do
-    OpencC2Test.DataCase.setup_sandbox(tags)
+    OpenC2Producer.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

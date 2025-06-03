@@ -1,4 +1,4 @@
-defmodule OpencC2Test.Repo.Migrations.CreateUsers do
+defmodule OpenC2Producer.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

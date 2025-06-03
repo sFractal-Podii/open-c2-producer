@@ -1,9 +1,9 @@
-defmodule OpencC2Test.MixProject do
+defmodule OpenC2Producer.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :openc_c2_test,
+      app: :open_c2_producer,
       version: "0.5.2-dev",
       elixir: "~> 1.17.3",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule OpencC2Test.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {OpencC2Test.Application, []},
+      mod: {OpenC2Producer.Application, []},
       extra_applications: [
         :logger,
         :runtime_tools,

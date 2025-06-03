@@ -1,4 +1,4 @@
-defmodule OpencC2Test.DataCase do
+defmodule OpenC2Producer.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule OpencC2Test.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use OpencC2Test.DataCase, async: true`, although
+  by setting `use OpenC2Producer.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,17 +18,17 @@ defmodule OpencC2Test.DataCase do
 
   using do
     quote do
-      alias OpencC2Test.Repo
+      alias OpenC2Producer.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import OpencC2Test.DataCase
+      import OpenC2Producer.DataCase
     end
   end
 
   setup tags do
-    OpencC2Test.DataCase.setup_sandbox(tags)
+    OpenC2Producer.DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,7 +36,7 @@ defmodule OpencC2Test.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(OpencC2Test.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(OpenC2Producer.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

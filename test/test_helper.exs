@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(OpencC2Test.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(OpenC2Producer.Repo, :manual)
