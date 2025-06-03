@@ -5,7 +5,7 @@ defmodule OpencC2Test.MixProject do
     [
       app: :openc_c2_test,
       version: "0.5.2-dev",
-      elixir: "~> 1.15.4",
+      elixir: "~> 1.17.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -64,7 +64,7 @@ defmodule OpencC2Test.MixProject do
         git: "https://github.com/sigu/sbom.git", branch: "auto-install-bom", runtime: false
       },
       {:ranch, ">= 0.0.0", manager: :rebar3, override: true},
-      {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
+      {:emqtt, github: "emqx/emqtt", tag: "1.14.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
       {:cowlib, "~> 2.11.0", override: true},
       {:gun, "~> 1.3.0", override: true}
     ]

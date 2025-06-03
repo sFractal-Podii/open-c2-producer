@@ -8,25 +8,14 @@ defmodule OpencC2Test.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
       OpencC2TestWeb.Telemetry,
-      # Start the Ecto repository
-      # OpencC2Test.Repo,
-      # Start the PubSub system
       {Phoenix.PubSub, name: OpencC2Test.PubSub},
-      # Start Finch
       {Finch, name: OpencC2Test.Finch},
-      # Start the Endpoint (http/https)
-      OpencC2TestWeb.Endpoint,
-      # Start a worker by calling: OpencC2Test.Worker.start_link(arg)
-      # {OpencC2Test.Worker, arg}
-      # start emqtt connection
-      {DynamicSupervisor, name: Emqtt.EmqxSupervisor, strategy: :one_for_one},
-      {DynamicSupervisor, name: Emqtt.HivemqSupervisor, strategy: :one_for_one}
+      OpencC2Test.Emqtt.Hivemq,
+      OpencC2Test.Emqtt.Emqx,
+      OpencC2TestWeb.Endpoint
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: OpencC2Test.Supervisor]
     Supervisor.start_link(children, opts)
   end
