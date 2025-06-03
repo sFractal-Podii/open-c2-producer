@@ -71,7 +71,7 @@ config :ueberauth, Ueberauth.Strategy.Github.OAuth,
 
 rand_suffix = :crypto.strong_rand_bytes(4) |> Base.encode16(case: :lower)
 
-config :openc_c2_test, Emqtt.Emqx,
+config :openc_c2_test, OpencC2Test.Emqtt.Emqx,
   host: ~c"#{System.fetch_env!("MQTT_HOST")}",
   port: String.to_integer(System.fetch_env!("MQTT_PORT")),
   client_id: System.fetch_env!("CLIENT_ID") <> rand_suffix,
@@ -79,7 +79,7 @@ config :openc_c2_test, Emqtt.Emqx,
 
 rand_suffix = :crypto.strong_rand_bytes(4) |> Base.encode16(case: :lower)
 
-config :openc_c2_test, Emqtt.Hivemq,
+config :openc_c2_test, OpencC2Test.Emqtt.Hivemq,
   client_id: System.fetch_env!("HIVEMQ_CLIENT_ID") <> rand_suffix,
   host: ~c"#{System.fetch_env!("HIVEMQ_HOST")}",
   port: String.to_integer(System.fetch_env!("HIVEMQ_PORT")),

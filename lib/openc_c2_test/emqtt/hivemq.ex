@@ -8,7 +8,7 @@ defmodule OpencC2Test.Emqtt.Hivemq do
   end
 
   def init([]) do
-    emqtt_opts = Application.fetch_env!(:openc_c2_test, Emqtt.Hivemq)
+    emqtt_opts = Application.fetch_env!(:openc_c2_test, OpencC2Test.Emqtt.Hivemq)
 
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
 

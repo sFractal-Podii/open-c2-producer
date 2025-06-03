@@ -8,7 +8,7 @@ defmodule OpencC2Test.Emqtt.Emqx do
   end
 
   def init([]) do
-    emqtt_opts = Application.fetch_env!(:openc_c2_test, Emqtt.Emqx)
+    emqtt_opts = Application.fetch_env!(:openc_c2_test, OpencC2Test.Emqtt.Emqx)
 
     Logger.info(%{
       event: :starting,
