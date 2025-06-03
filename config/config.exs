@@ -7,17 +7,17 @@
 # General application configuration
 import Config
 
-config :openc_c2_test,
-  ecto_repos: [OpencC2Test.Repo]
+config :open_c2_producer,
+  ecto_repos: [OpenC2Producer.Repo]
 
 # Configures the endpoint
-config :openc_c2_test, OpencC2TestWeb.Endpoint,
+config :open_c2_producer, OpenC2ProducerWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: OpencC2TestWeb.ErrorHTML, json: OpencC2TestWeb.ErrorJSON],
+    formats: [html: OpenC2ProducerWeb.ErrorHTML, json: OpenC2ProducerWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: OpencC2Test.PubSub,
+  pubsub_server: OpenC2Producer.PubSub,
   live_view: [signing_salt: "tdtsUA9R"]
 
 # Configures the mailer
@@ -27,7 +27,7 @@ config :openc_c2_test, OpencC2TestWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :openc_c2_test, OpencC2Test.Mailer, adapter: Swoosh.Adapters.Local
+config :open_c2_producer, OpenC2Producer.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -71,7 +71,7 @@ config :ueberauth, Ueberauth.Strategy.Github.OAuth,
 
 rand_suffix = :crypto.strong_rand_bytes(4) |> Base.encode16(case: :lower)
 
-config :openc_c2_test, OpencC2Test.Emqtt.Emqx,
+config :open_c2_producer, OpenC2Producer.Emqtt.Emqx,
   host: ~c"#{System.fetch_env!("MQTT_HOST")}",
   port: String.to_integer(System.fetch_env!("MQTT_PORT")),
   client_id: System.fetch_env!("CLIENT_ID") <> rand_suffix,
@@ -79,7 +79,7 @@ config :openc_c2_test, OpencC2Test.Emqtt.Emqx,
 
 rand_suffix = :crypto.strong_rand_bytes(4) |> Base.encode16(case: :lower)
 
-config :openc_c2_test, OpencC2Test.Emqtt.Hivemq,
+config :open_c2_producer, OpenC2Producer.Emqtt.Hivemq,
   client_id: System.fetch_env!("HIVEMQ_CLIENT_ID") <> rand_suffix,
   host: ~c"#{System.fetch_env!("HIVEMQ_HOST")}",
   port: String.to_integer(System.fetch_env!("HIVEMQ_PORT")),

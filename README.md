@@ -1,6 +1,6 @@
-# OpencC2Test
+# OpenC2Producer
 
-Openc2Test is a dashboard for testing connection between a publisher(Openc2Test) and subscriber(TwinklyMaha) over a broker. In this case, openc2test publishes a topic subscribed to by TwinklyMaha.
+Openc2Producer is a dashboard for testing connection between a publisher(Openc2Producer) and subscriber(TwinklyMaha) over a broker. In this case, Openc2Producer publishes a topic subscribed to by TwinklyMaha.
 This dashboard provides a convinient way for choosing a desired broker and the command you
 wish to test with.
 
@@ -38,7 +38,7 @@ We designed this user interface (UI) to be quick and simple to use without requi
 
 ## Expected results
 
-At this point, the TwinklyMaha is connected to the broker and it's subscribed to the topic published by Openc2test. You can just head over to TwinklyMaha to see your changes.
+At this point, the TwinklyMaha is connected to the broker and it's subscribed to the topic published by Openc2Producer. You can just head over to TwinklyMaha to see your changes.
 
 ![UI screenshot](docs/Screenshot%20from%20TwinklyMaha.png)
 
