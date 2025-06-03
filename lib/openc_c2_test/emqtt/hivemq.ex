@@ -1,97 +1,46 @@
-defmodule Emqtt.Hivemq do
+defmodule OpencC2Test.Emqtt.Hivemq do
   @moduledoc "Emqtt server responsible for handling pubsub between clients and broker"
   use GenServer
   require Logger
-
-  @clean_start false
 
   def start_link([]) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
   def init([]) do
-    topic = "oc2/cmd/device/t02"
-
-    clientid =
-      System.get_env("HIVEMQ_CLIENT_ID") ||
-        raise """
-        environment variable HIVEMQ_CLIENT_ID is missing.
-        For example:
-        export HIVEMQ_CLIENT_ID=sfractal2020
-        """
-
-    Logger.info("client_id is #{clientid}")
-
-    host =
-      ~c"#{System.get_env("HIVEMQ_HOST")}" ||
-        raise """
-        environment variable HIVEMQ_HOST is missing.
-        Examples:
-        export HIVEMQ_HOST="35.221.11.97 "
-        export HIVEMQ_HOST="mqtt.sfractal.com"
-        """
-
-    Logger.info("mqtt_host is #{host}")
-
-    port =
-      String.to_integer(
-        System.get_env("HIVEMQ_PORT") ||
-          raise("""
-          environment variable HIVEMQ_PORT is missing.
-          Example:
-          export HIVEMQ_PORT=1883
-          """)
-      )
-
-    Logger.info("mqtt_port is #{port}")
-
-    name =
-      String.to_atom(System.get_env("HIVEMQ_USER_NAME")) ||
-        raise """
-        environment variable HIVEMQ_USER_NAME is missing.
-        Examples:
-        export HIVEMQ_USER_NAME="plug"
-        """
-
-    Logger.info("user_name is #{name}")
-
-    emqtt_opts = [
-      host: host,
-      port: port,
-      clientid: clientid,
-      clean_start: @clean_start,
-      name: name
-    ]
+    emqtt_opts = Application.fetch_env!(:openc_c2_test, OpencC2Test.Emqtt.Hivemq)
 
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
 
-    state = %{pid: pid, topic: topic}
+    Logger.info(%{
+      event: :starting,
+      module: __MODULE__,
+      options: emqtt_opts
+    })
 
-    {:ok, state, {:continue, :start_emqtt}}
+    {:ok, %{pid: pid}, {:continue, :start_emqtt}}
   end
 
   def handle_continue(:start_emqtt, %{pid: pid} = state) do
     {:ok, _} = :emqtt.connect(pid)
 
+    Logger.info(%{event: :connected, module: __MODULE__})
+
     {:noreply, state}
   end
 
-  def handle_cast({:publish, message}, %{topic: topic, pid: pid} = state) do
-    :emqtt.publish(
-      pid,
-      topic,
-      message
-    )
+  def handle_cast({:publish, {message, topic}}, %{topic: topic, pid: pid} = state) do
+    :emqtt.publish(pid, topic, message)
 
-    {:stop, :normal, state}
+    {:noreply, state}
   end
 
   def terminate(reason, state) do
-    Logger.info("Emqx client terminated #{inspect({reason, state})}")
-  end
-
-  def publish(message) do
-    Logger.info("publish #{message}")
-    GenServer.cast(__MODULE__, {:publish, message})
+    Logger.info(%{
+      event: :terminated,
+      module: __MODULE__,
+      reason: reason,
+      state: state
+    })
   end
 end

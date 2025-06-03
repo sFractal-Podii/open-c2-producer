@@ -3,6 +3,7 @@ defmodule OpencC2TestWeb.RunScriptLive do
 
   import OpencC2TestWeb.CoreComponents
   alias OpencC2Test.TestScript
+  alias OpencC2Test.Emqtt
 
   require Logger
 
@@ -26,7 +27,12 @@ defmodule OpencC2TestWeb.RunScriptLive do
             <.input
               type="select"
               field={@form[:device]}
-              options={[TwinklyMaha: "twinklymaha"]}
+              options={[
+                TwinklyMahaLocal: "maha-local",
+                TwinklyMahaProd: "maha-prod",
+                TwinklyMahaStaging: "maha-staging",
+                TwinklyMahaALpha: "maha-alpha"
+              ]}
               prompt="Select project"
               label="Which device are you testing?"
             />
@@ -96,11 +102,7 @@ defmodule OpencC2TestWeb.RunScriptLive do
   end
 
   def handle_event("save", %{"test_script" => params}, socket) do
-    Logger.info("Button Clicked")
-
     publish_message(params)
-
-    # Logger.info("message is published")
 
     {:noreply, put_flash(socket, :info, "Head over to TwinklyMaha to see your changes.")}
   end
@@ -116,40 +118,37 @@ defmodule OpencC2TestWeb.RunScriptLive do
     |> Emqtt.publish()
   end
 
-  defp publish_message(%{"command" => command, "broker" => broker})
+  defp publish_message(%{"command" => command, "broker" => broker} = args)
        when command == "turn_led_on" or command == "turn_led_off" do
+    [_, env] = String.split(args["device"], "-")
+
     color =
       case command do
         "turn_led_on" -> "on"
         "turn_led_off" -> "off"
       end
 
-     %{
+    %{
       "action" => "set",
       "args" => %{"response_requested" => "complete"},
       "target" => %{"led" => color}
     }
     |> Jason.encode!()
-
-    |> start_and_publish(broker)
+    |> publish(broker, env)
   end
 
   defp publish_message(_params) do
     Logger.info("commands not matching")
   end
 
-  defp start_and_publish(message, "emqx") do
-    Emqtt.EmqxSupervisor.start_emqx()
-    Emqtt.Emqx.publish(message)
+  defp publish(message, "emqx", env) do
+    # {deploy_env}"
+    topic = "oc2/cmd/device/t01/#{env}"
+    Emqtt.publish(Emqtt.Emqx, topic, message)
   end
 
-  defp start_and_publish(message, "hivemq") do
-    Emqtt.HivemqSupervisor.start_hivemq()
-    Emqtt.Hivemq.publish(message)
+  defp publish(message, "hivemq", env) do
+    topic = "oc2/cmd/device/t02/#{env}"
+    Emqtt.publish(Emqtt.Hivemq, topic, message)
   end
 end
-
-# check broker
-# call the required dynamic supervisor
-
-# terminate once publish is done
