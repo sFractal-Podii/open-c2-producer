@@ -32,10 +32,6 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
-      # url: 'http://35.245.13.116:4000' ##use the one generated on deployment
-    # env:
-    #   GCE_INSTANCE: ${{ secrets.GCE_INSTANCE }}
-    #   GCE_INSTANCE_ZONE: us-east4-c
 
     steps:
     - name: Checkout
@@ -46,9 +42,8 @@ jobs:
       with:
         credentials_json: ${{ secrets.GCE_SA_KEY }}
 
-    - uses: google-github-actions/setup-gcloud@v2
-      with:
-        version: "506.0.0"
+    - name: 'Set up Cloud SDK'
+      uses: google-github-actions/setup-gcloud@v2
 
     - run: |-
         gcloud --quiet auth configure-docker
@@ -68,6 +63,6 @@ jobs:
       id: deploy
       uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: openc-c2-producer
+        service: openc-c2-producer-staging
         region: us-east4
         image: "gcr.io/duncan-openc2-plugfest/openc2-producer:staging"
