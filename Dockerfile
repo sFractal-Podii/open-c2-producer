@@ -60,9 +60,6 @@ RUN mix assets.deploy && mix release
 FROM debian:bullseye-slim AS app
 
 ENV LANG=C.UTF-8
-ENV HOST 0.0.0.0
-
-EXPOSE 8080
 
 RUN useradd --create-home app
 WORKDIR /home/app
