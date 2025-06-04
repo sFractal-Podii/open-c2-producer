@@ -18,6 +18,7 @@ on:
   push:
     branches:
     - develop
+    - test-staging-deploy
 
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
@@ -28,6 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: staging
+    permissions:
+      contents: "read"
+      id-token: "write"
       # url: 'http://35.245.13.116:4000' ##use the one generated on deployment
     # env:
     #   GCE_INSTANCE: ${{ secrets.GCE_INSTANCE }}
@@ -35,21 +39,17 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
-    # Setup gcloud CLI
-    - run: |
-        sudo apt-get install python2.7
-        export CLOUDSDK_PYTHON="/usr/bin/python2"
-        
-    - uses: google-github-actions/setup-gcloud@v0
+    - id: "auth"
+      uses: "google-github-actions/auth@v2"
       with:
-        version: '290.0.1'
-        service_account_key: ${{ secrets.GCE_SA_KEY }}
-        project_id: ${{ secrets.GCE_PROJECT }}
+        credentials_json: ${{ secrets.GCE_SA_KEY }}
 
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
+    - uses: google-github-actions/setup-gcloud@v2
+      with:
+        version: "506.0.0"
+
     - run: |-
         gcloud --quiet auth configure-docker
 
@@ -57,17 +57,17 @@ jobs:
     - name: Build
       run: |
         echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
-        docker build --tag "gcr.io/duncan-openc2-plugfest/openc2-test:staging" .
+        docker build --tag "gcr.io/duncan-openc2-plugfest/openc2-producer:staging" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/duncan-openc2-plugfest/openc2-test:staging"
+        docker push "gcr.io/duncan-openc2-plugfest/openc2-producer:staging"
 
     - name: Deploy to Cloud Run
       id: deploy
-      uses: google-github-actions/deploy-cloudrun@v0
+      uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: openc-c2-test
+        service: openc-c2-producer
         region: us-east4
-        image: "gcr.io/duncan-openc2-plugfest/openc2-test:staging"
+        image: "gcr.io/duncan-openc2-plugfest/openc2-producer:staging"
