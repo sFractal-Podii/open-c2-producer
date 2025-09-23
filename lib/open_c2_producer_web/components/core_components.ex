@@ -17,7 +17,7 @@ defmodule OpenC2ProducerWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import OpenC2ProducerWeb.Gettext
+  use Gettext, backend: OpenC2ProducerWeb.Gettext
 
   @doc """
   Renders a modal.
