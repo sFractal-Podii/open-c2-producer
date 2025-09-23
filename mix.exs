@@ -48,7 +48,7 @@ defmodule OpenC2Producer.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.1"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.11.6"},
+      {:swoosh, "~> 1.19.5"},
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
@@ -64,7 +64,7 @@ defmodule OpenC2Producer.MixProject do
         git: "https://github.com/sigu/sbom.git", branch: "auto-install-bom", runtime: false
       },
       {:ranch, ">= 0.0.0", manager: :rebar3, override: true},
-      {:emqtt, github: "emqx/emqtt", tag: "1.14.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
+      {:emqtt, github: "emqx/emqtt", tag: "1.14.6", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
       {:cowlib, "~> 2.11.0", override: true},
       {:gun, "~> 1.3.0", override: true}
     ]
