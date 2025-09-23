@@ -43,7 +43,7 @@ defmodule OpenC2ProducerWeb do
         layouts: [html: OpenC2ProducerWeb.Layouts]
 
       import Plug.Conn
-      import OpenC2ProducerWeb.Gettext
+      use Gettext, backend: OpenC2ProducerWeb.Gettext
       alias OpenC2ProducerWeb.Router.Helpers, as: Routes
 
       unquote(verified_routes())
@@ -87,7 +87,7 @@ defmodule OpenC2ProducerWeb do
       use Phoenix.HTML
       # Core UI components and translation
       import OpenC2ProducerWeb.CoreComponents
-      import OpenC2ProducerWeb.Gettext
+      use Gettext, backend: OpenC2ProducerWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
