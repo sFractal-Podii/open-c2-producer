@@ -48,7 +48,7 @@ defmodule OpenC2Producer.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.1"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.4.0", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.19.5"},
+      {:swoosh, "~> 1.20.0"},
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 1.1"},
       {:telemetry_poller, "~> 1.0"},
