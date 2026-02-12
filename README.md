@@ -8,14 +8,14 @@ wish to test with.
 
 To start your Phoenix server:
 
-  * Run `mix setup` to install and setup dependencies
-  * Create a file `.env` in the project root and add the following environment variables:
+  * Create a `.env` file in the project root directory if it does not already exist and add the following environment variables:
     * export CLIENT_ID=add your client_id
     * export MQTT_HOST=test.mosquitto.org
     * export MQTT_PORT=1883
     * export USER_NAME=plug
     * export PASSWORD=fest
   * Source the environment variables by running `source .env`. This contains environment specific settings and keys.
+  * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 ## How to use the project
